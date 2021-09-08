@@ -122,17 +122,124 @@ exports.model = {
   }
 };
 ````
-7、分别对前后端分离的项目启动
+7、新建数据库
+
+首先新建weekly数据库
+
+```sql
+create database weekly
+```
+
+然后依次新建下面的数据表：
+
+- week_user
+
+  ```sql
+  CREATE TABLE `week_user` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `usernum` varchar(45) DEFAULT NULL,
+      `username` varchar(45) DEFAULT NULL,
+      `password` varchar(120) DEFAULT NULL,
+      `company_id` varchar(45) DEFAULT NULL,
+      `company_name` varchar(100) DEFAULT NULL,
+      `department_id` varchar(45) DEFAULT NULL,
+      `department_name` varchar(100) DEFAULT NULL,
+      `email` varchar(100) DEFAULT NULL,
+      `role` int(11) DEFAULT NULL,
+      `role_name` varchar(50) DEFAULT NULL,
+      `telephone` varchar(50) DEFAULT NULL,
+    	PRIMARY KEY(`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  ```
+
+- week_week
+
+  ```sql
+  CREATE TABLE `week_week` (
+  	`id` int(11) NOT NULL AUTO_INCREMENT,
+  	`usernum` varchar(45) DEFAULT NULL,
+      `username` varchar(45) DEFAULT NULL,
+  	`content` varchar(200) DEFAULT NULL,
+      `role` int(11) DEFAULT NULL,
+      `date` varchar(100) DEFAULT NULL,
+      `time` bigint DEFAULT NULL,
+      `startDate` bigint DEFAULT NULL,
+      `endDate` bigint DEFAULT NULL,
+  	`company_id` varchar(45) DEFAULT NULL,
+      `department_id` varchar(45) DEFAULT NULL,
+  	PRIMARY KEY(`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  ```
+
+- week_log
+
+  ```sql
+  CREATE TABLE `week_log` (
+  	`id` int(11) NOT NULL AUTO_INCREMENT,
+  	`usernum` varchar(45) DEFAULT NULL,
+  	`login_time` datetime DEFAULT NULL,
+  	`password` varchar(120) DEFAULT NULL,
+  	`login_ip` varchar(120) DEFAULT NULL,
+  	PRIMARY KEY(`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  ```
+
+- week_company
+
+  ```sql
+  CREATE TABLE `week_company` (
+  	`id` int(11) NOT NULL AUTO_INCREMENT,
+  	`company_id` varchar(45) DEFAULT NULL,
+  	`company_name` varchar(200) DEFAULT NULL,
+  	`usernum` varchar(45) DEFAULT NULL,
+  	`username` varchar(45) DEFAULT NULL,
+  	`telephone` varchar(50) DEFAULT NULL,
+  	`email` varchar(100) DEFAULT NULL,
+  	`create_time` datetime DEFAULT NULL,
+  	`update_time` datetime DEFAULT NULL,
+  	PRIMARY KEY(`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  ```
+
+- week_department
+
+  ```sql
+  CREATE TABLE `week_department` (
+  	`id` int(11) NOT NULL AUTO_INCREMENT,
+  	`company_id` varchar(45) DEFAULT NULL,
+  	`company_name` varchar(200) DEFAULT NULL,
+      `department_id` varchar(45) DEFAULT NULL,
+      `department_name` varchar(100) DEFAULT NULL,
+  	PRIMARY KEY(`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  ```
+
+- week_role
+
+  ```
+  CREATE TABLE `week_role` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `role` int(11) DEFAULT NULL,
+      `role_name` varchar(50) DEFAULT NULL,
+      `company_id` varchar(45) DEFAULT NULL,
+      `company_name` varchar(100) DEFAULT NULL,
+    	PRIMARY KEY(`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  ```
+
+  
+
+8、分别对前后端分离的项目启动
 
 (1)前端vue的weekly-web的启动
 ````
 npm run dev
- ````
+````
 
 (2)和node后端weekly-node的启动
 ````
 npm start
- ````
+````
 
 ### 五、欢迎关注
 欢迎关注Github：https://github.com/saucxs
